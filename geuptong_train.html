@@ -313,17 +313,92 @@
     text-align: center;
   }
 
-  .train-illustration{
-    width: 270px;
+  .train-band{
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 96px;
     margin: 0 auto 6px;
-    animation: chug 1.4s ease-in-out infinite;
+    overflow: hidden;
     filter: drop-shadow(0 8px 10px rgba(0,0,0,0.15));
   }
 
+  .train-band::after{
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 8px; height: 3px;
+    background: repeating-linear-gradient(90deg, #bfe3cf 0 18px, transparent 18px 26px);
+    opacity: 0.8;
+  }
+
+  .train-track{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    width: max-content;
+    animation: train-cruise 9s linear infinite;
+  }
+
+  .train-set{
+    display: flex;
+    align-items: flex-end;
+    flex-shrink: 0;
+  }
+
+  .train-engine{
+    width: 198px;
+    height: 92px;
+    flex-shrink: 0;
+    animation: chug 1.4s ease-in-out infinite;
+  }
+
+  .train-engine svg{
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .train-car{
+    position: relative;
+    width: 108px; height: 76px;
+    margin: 0 3px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: linear-gradient(180deg, #12b06b 0%, #00a651 45%, #00833f 100%);
+    border: 3px solid #00833f;
+    border-radius: 12px;
+    animation: chug 1.4s ease-in-out infinite;
+  }
+
+  .train-car .tc-window{
+    width: 22px; height: 18px;
+    border-radius: 5px;
+    background: #eafff2;
+  }
+
+  .train-car::after{
+    content: "";
+    position: absolute;
+    left: 10px; right: 10px; bottom: -9px; height: 16px;
+    background:
+      radial-gradient(circle 7px at 10px 8px, #2b2b2b 7px, transparent 8px),
+      radial-gradient(circle 7px at calc(100% - 10px) 8px, #2b2b2b 7px, transparent 8px);
+  }
+
+  @keyframes train-cruise{
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
   @keyframes chug{
-    0%, 100% { transform: translateX(0) rotate(0deg); }
-    25% { transform: translateX(-2px) rotate(-0.3deg); }
-    75% { transform: translateX(2px) rotate(0.3deg); }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-1px) rotate(-0.3deg); }
+    75% { transform: translateY(1px) rotate(0.3deg); }
   }
 
   .logo-panel{
@@ -665,7 +740,9 @@
   .result-close:active{ transform: scale(0.97); }
 
   @media (max-width: 360px){
-    .train-illustration{ width: 220px; }
+    .train-band{ height: 78px; }
+    .train-engine{ width: 160px; height: 74px; }
+    .train-car{ width: 88px; height: 62px; }
     .character-wrap{ width: 150px; height: 190px; }
   }
 </style>
@@ -769,51 +846,108 @@
   </div>
 
   <div class="page">
-    <div class="stage-content">
-      <div class="train-illustration">
-        <svg viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="140" cy="120" rx="130" ry="6" fill="#000" opacity="0.07"/>
-          <line x1="15" y1="112" x2="265" y2="112" stroke="#bfe3cf" stroke-width="3"/>
-          <line x1="24" y1="108" x2="24" y2="116" stroke="#bfe3cf" stroke-width="3"/>
-          <line x1="48" y1="108" x2="48" y2="116" stroke="#bfe3cf" stroke-width="3"/>
-          <line x1="72" y1="108" x2="72" y2="116" stroke="#bfe3cf" stroke-width="3"/>
-          <line x1="96" y1="108" x2="96" y2="116" stroke="#bfe3cf" stroke-width="3"/>
-          <line x1="120" y1="108" x2="120" y2="116" stroke="#bfe3cf" stroke-width="3"/>
-          <line x1="144" y1="108" x2="144" y2="116" stroke="#bfe3cf" stroke-width="3"/>
-          <line x1="168" y1="108" x2="168" y2="116" stroke="#bfe3cf" stroke-width="3"/>
-          <line x1="192" y1="108" x2="192" y2="116" stroke="#bfe3cf" stroke-width="3"/>
-          <line x1="216" y1="108" x2="216" y2="116" stroke="#bfe3cf" stroke-width="3"/>
-          <line x1="240" y1="108" x2="240" y2="116" stroke="#bfe3cf" stroke-width="3"/>
+    <div class="train-band">
+      <div class="train-track">
+        <div class="train-set">
+          <div class="train-engine">
+            <svg viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="185" y="45" width="75" height="50" rx="14" fill="#3dbd7a" stroke="#00833f" stroke-width="2"/>
+              <rect x="196" y="55" width="24" height="20" rx="5" fill="#eafff2"/>
+              <rect x="226" y="55" width="24" height="20" rx="5" fill="#eafff2"/>
 
-          <rect x="185" y="45" width="75" height="50" rx="14" fill="#3dbd7a" stroke="#00833f" stroke-width="2"/>
-          <rect x="196" y="55" width="24" height="20" rx="5" fill="#eafff2"/>
-          <rect x="226" y="55" width="24" height="20" rx="5" fill="#eafff2"/>
+              <path d="M25 95 L25 55 Q25 28 55 28 L205 28 Q215 28 215 40 L215 95 Z" fill="#00a651" stroke="#00833f" stroke-width="3"/>
+              <rect x="40" y="40" width="160" height="30" rx="8" fill="#e8fff2"/>
+              <rect x="46" y="45" width="30" height="20" rx="5" fill="#7fd8ac"/>
+              <rect x="82" y="45" width="30" height="20" rx="5" fill="#7fd8ac"/>
+              <rect x="118" y="45" width="30" height="20" rx="5" fill="#7fd8ac"/>
+              <rect x="154" y="45" width="30" height="20" rx="5" fill="#7fd8ac"/>
 
-          <path d="M25 95 L25 55 Q25 28 55 28 L205 28 Q215 28 215 40 L215 95 Z" fill="#00a651" stroke="#00833f" stroke-width="3"/>
-          <rect x="40" y="40" width="160" height="30" rx="8" fill="#e8fff2"/>
-          <rect x="46" y="45" width="30" height="20" rx="5" fill="#7fd8ac"/>
-          <rect x="82" y="45" width="30" height="20" rx="5" fill="#7fd8ac"/>
-          <rect x="118" y="45" width="30" height="20" rx="5" fill="#7fd8ac"/>
-          <rect x="154" y="45" width="30" height="20" rx="5" fill="#7fd8ac"/>
+              <line x1="90" y1="70" x2="90" y2="95" stroke="#00833f" stroke-width="2"/>
+              <line x1="150" y1="70" x2="150" y2="95" stroke="#00833f" stroke-width="2"/>
 
-          <line x1="90" y1="70" x2="90" y2="95" stroke="#00833f" stroke-width="2"/>
-          <line x1="150" y1="70" x2="150" y2="95" stroke="#00833f" stroke-width="2"/>
+              <circle cx="120" cy="30" r="13" fill="#fff"/>
+              <text x="120" y="35" font-size="15" font-weight="900" fill="#00833f" text-anchor="middle" font-family="Arial">2</text>
 
-          <circle cx="120" cy="30" r="13" fill="#fff"/>
-          <text x="120" y="35" font-size="15" font-weight="900" fill="#00833f" text-anchor="middle" font-family="Arial">2</text>
+              <circle cx="32" cy="80" r="6" fill="#fff6d1" stroke="#e8c84a" stroke-width="2"/>
 
-          <circle cx="32" cy="80" r="6" fill="#fff6d1" stroke="#e8c84a" stroke-width="2"/>
+              <circle cx="45" cy="104" r="8" fill="#2b2b2b"/><circle cx="45" cy="104" r="3" fill="#888"/>
+              <circle cx="100" cy="104" r="8" fill="#2b2b2b"/><circle cx="100" cy="104" r="3" fill="#888"/>
+              <circle cx="155" cy="104" r="8" fill="#2b2b2b"/><circle cx="155" cy="104" r="3" fill="#888"/>
+              <circle cx="205" cy="104" r="8" fill="#2b2b2b"/><circle cx="205" cy="104" r="3" fill="#888"/>
+              <circle cx="240" cy="104" r="8" fill="#2b2b2b"/><circle cx="240" cy="104" r="3" fill="#888"/>
+            </svg>
+          </div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+        </div>
+        <div class="train-set" aria-hidden="true">
+          <div class="train-engine">
+            <svg viewBox="0 0 280 130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="185" y="45" width="75" height="50" rx="14" fill="#3dbd7a" stroke="#00833f" stroke-width="2"/>
+              <rect x="196" y="55" width="24" height="20" rx="5" fill="#eafff2"/>
+              <rect x="226" y="55" width="24" height="20" rx="5" fill="#eafff2"/>
 
-          <circle cx="45" cy="104" r="8" fill="#2b2b2b"/><circle cx="45" cy="104" r="3" fill="#888"/>
-          <circle cx="100" cy="104" r="8" fill="#2b2b2b"/><circle cx="100" cy="104" r="3" fill="#888"/>
-          <circle cx="155" cy="104" r="8" fill="#2b2b2b"/><circle cx="155" cy="104" r="3" fill="#888"/>
-          <circle cx="205" cy="104" r="8" fill="#2b2b2b"/><circle cx="205" cy="104" r="3" fill="#888"/>
-          <circle cx="240" cy="104" r="8" fill="#2b2b2b"/><circle cx="240" cy="104" r="3" fill="#888"/>
+              <path d="M25 95 L25 55 Q25 28 55 28 L205 28 Q215 28 215 40 L215 95 Z" fill="#00a651" stroke="#00833f" stroke-width="3"/>
+              <rect x="40" y="40" width="160" height="30" rx="8" fill="#e8fff2"/>
+              <rect x="46" y="45" width="30" height="20" rx="5" fill="#7fd8ac"/>
+              <rect x="82" y="45" width="30" height="20" rx="5" fill="#7fd8ac"/>
+              <rect x="118" y="45" width="30" height="20" rx="5" fill="#7fd8ac"/>
+              <rect x="154" y="45" width="30" height="20" rx="5" fill="#7fd8ac"/>
 
-          <path d="M266 58 h10 M270 68 h10 M266 78 h10" stroke="#00a651" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
-        </svg>
+              <line x1="90" y1="70" x2="90" y2="95" stroke="#00833f" stroke-width="2"/>
+              <line x1="150" y1="70" x2="150" y2="95" stroke="#00833f" stroke-width="2"/>
+
+              <circle cx="120" cy="30" r="13" fill="#fff"/>
+              <text x="120" y="35" font-size="15" font-weight="900" fill="#00833f" text-anchor="middle" font-family="Arial">2</text>
+
+              <circle cx="32" cy="80" r="6" fill="#fff6d1" stroke="#e8c84a" stroke-width="2"/>
+
+              <circle cx="45" cy="104" r="8" fill="#2b2b2b"/><circle cx="45" cy="104" r="3" fill="#888"/>
+              <circle cx="100" cy="104" r="8" fill="#2b2b2b"/><circle cx="100" cy="104" r="3" fill="#888"/>
+              <circle cx="155" cy="104" r="8" fill="#2b2b2b"/><circle cx="155" cy="104" r="3" fill="#888"/>
+              <circle cx="205" cy="104" r="8" fill="#2b2b2b"/><circle cx="205" cy="104" r="3" fill="#888"/>
+              <circle cx="240" cy="104" r="8" fill="#2b2b2b"/><circle cx="240" cy="104" r="3" fill="#888"/>
+            </svg>
+          </div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+          <div class="train-car"><span class="tc-window"></span><span class="tc-window"></span><span class="tc-window"></span></div>
+        </div>
       </div>
+    </div>
 
+    <div class="stage-content">
       <div class="logo-panel">
         <h1 class="logo"><span class="badge">2</span>급똥열차</h1>
         <p class="tagline">참을 수 없는 순간,<br>급똥열차가 개찰구 안 화장실 위치를 알려드립니다.</p>
