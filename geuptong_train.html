@@ -112,12 +112,13 @@
 
   .fly-item{
     position: absolute;
+    opacity: 0;
     will-change: transform, opacity;
     filter: drop-shadow(0 3px 4px rgba(0,0,0,0.18));
   }
 
-  .fly-right{ animation-name: fly-right; animation-timing-function: linear; animation-iteration-count: infinite; }
-  .fly-left{ animation-name: fly-left; animation-timing-function: linear; animation-iteration-count: infinite; }
+  .fly-right{ animation-name: fly-right; animation-timing-function: linear; animation-iteration-count: infinite; animation-fill-mode: backwards; }
+  .fly-left{ animation-name: fly-left; animation-timing-function: linear; animation-iteration-count: infinite; animation-fill-mode: backwards; }
 
   @keyframes fly-right{
     0% { transform: translateX(-15vw) translateY(0) rotate(-10deg); opacity: 0; }
@@ -154,11 +155,13 @@
 
   .fly-card{
     position: absolute;
+    opacity: 0;
     border-radius: 14px;
     box-shadow: 0 10px 26px rgba(0,0,0,0.25);
     text-align: center;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+    animation-fill-mode: backwards;
   }
 
   .fly-card.dir-right{ animation-name: fly-right-card; }
