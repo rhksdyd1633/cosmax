@@ -27,7 +27,7 @@
     padding: 0;
     font-family: var(--font-kr);
     color: var(--text);
-    background: linear-gradient(180deg, #eafff2 0%, #d7f3e2 45%, #eafff2 100%);
+    background: linear-gradient(180deg, #eef1ee 0%, #e6ebe7 55%, #dbe2dd 100%);
     min-height: 100vh;
     -webkit-text-size-adjust: 100%;
     overflow-x: hidden;
@@ -94,6 +94,91 @@
 
   .stage-pole.left{ left: 9%; }
   .stage-pole.right{ right: 9%; }
+
+  .wall-seams{
+    position: absolute;
+    top: 130px; left: 0; right: 0; bottom: 90px;
+    background: repeating-linear-gradient(90deg, rgba(0,0,0,0.05) 0 2px, transparent 2px 150px);
+    z-index: 0;
+  }
+
+  .wall-stripe{
+    position: absolute;
+    top: 130px; left: 0; right: 0; height: 10px;
+    background: linear-gradient(90deg, var(--line2-dark), var(--line2) 50%, var(--line2-dark));
+    opacity: 0.9;
+    z-index: 1;
+  }
+
+  .strap-rail{
+    position: absolute;
+    top: 140px; left: 0; right: 0; height: 5px;
+    background: linear-gradient(180deg, #d7dcd9, #a7aead);
+    z-index: 1;
+  }
+
+  .strap{
+    position: absolute;
+    top: 145px;
+    width: 3px; height: 30px;
+    background: #b7bdb9;
+    z-index: 1;
+  }
+
+  .strap::after{
+    content: "";
+    position: absolute;
+    left: 50%; bottom: -15px;
+    width: 20px; height: 16px;
+    transform: translateX(-50%);
+    border: 4px solid #d9c99a;
+    border-radius: 5px 5px 12px 12px;
+  }
+
+  .side-window{
+    position: absolute;
+    top: 200px; width: 34px; height: 90px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #062f1c 0%, #0c4d30 100%);
+    overflow: hidden;
+    box-shadow: inset 0 0 0 3px #cfd6d2;
+    opacity: 0.9;
+    z-index: 0;
+  }
+
+  .side-window::before{
+    content: "";
+    position: absolute;
+    inset: -20% -60%;
+    background: repeating-linear-gradient(100deg, rgba(255,255,255,0.14) 0 4px, transparent 4px 40px);
+    animation: tunnel-lights 1.5s linear infinite;
+  }
+
+  .side-window.left{ left: 3%; }
+  .side-window.right{ right: 3%; }
+
+  .floor-band{
+    position: absolute;
+    left: 0; right: 0; bottom: 0; height: 90px;
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0 4px, transparent 4px 16px),
+      linear-gradient(180deg, #b9c1bd 0%, #9aa39d 100%);
+    z-index: 0;
+  }
+
+  .bench{
+    position: absolute;
+    bottom: 34px;
+    width: 90px; height: 46px;
+    background: linear-gradient(180deg, #2f5fa8, #274d87);
+    border: 4px solid #d7dcd9;
+    border-radius: 10px 10px 4px 4px;
+    opacity: 0.85;
+    z-index: 0;
+  }
+
+  .bench.left{ left: -18px; }
+  .bench.right{ right: -18px; }
 
   .stage-floor-line{
     position: absolute;
@@ -757,6 +842,17 @@
       <span class="frame-line" style="left:62%"></span>
       <span class="frame-line" style="left:80%"></span>
     </div>
+    <div class="wall-seams"></div>
+    <div class="wall-stripe"></div>
+    <div class="strap-rail"></div>
+    <span class="strap" style="left:15%"></span>
+    <span class="strap" style="left:32%"></span>
+    <span class="strap" style="left:49%"></span>
+    <span class="strap" style="left:66%"></span>
+    <span class="strap" style="left:83%"></span>
+    <div class="side-window left"></div>
+    <div class="side-window right"></div>
+
     <div class="stage-pole left"></div>
     <div class="stage-pole right"></div>
 
@@ -842,6 +938,9 @@
       </div>
     </div>
 
+    <div class="floor-band"></div>
+    <div class="bench left"></div>
+    <div class="bench right"></div>
     <div class="stage-floor-line"></div>
   </div>
 
